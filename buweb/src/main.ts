@@ -1,8 +1,10 @@
 import {createApp} from "vue";
 import App from "./App.vue";
-console.log(App);
+import pinia from "./store";
 import "./styles/reset.css";
-import router from "./router";
+import router from "./router/router";
 const app=createApp(App);
-app.mount("#app");
 app.use(router);
+app.use(pinia);
+app.mount("#app");
+
