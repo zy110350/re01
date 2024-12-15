@@ -3,7 +3,7 @@ import Nprogress from "nprogress";
 const routes:Array<RouteRecordRaw>=[{
     path:"",
     name:"",
-    component:()=>import("../views/home/index.vue"),
+    component:()=>import("../views/home/components/index.vue"),
     meta:{},
     children:[]
 }];
