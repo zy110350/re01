@@ -1,15 +1,42 @@
-import {createWebHashHistory, createRouter,RouteRecordRaw} from "vue-router";
+import {createWebHistory, createRouter,RouteRecordRaw} from "vue-router";
 import Nprogress from "nprogress";
-const routes:Array<RouteRecordRaw>=[{
-    path:"",
+
+const homeRouter:Array<RouteRecordRaw>={
+    path:"/",
     name:"",
     component:()=>import("../views/home/components/index.vue"),
     meta:{},
     children:[]
-}];
+};
+
+export const aboutRouter={
+    path:"/about",
+    name:"about",
+    component:()=>import("../views/about/index.vue"),
+    meta:{},
+    children:[]
+} as RouteRecordRaw;
+
+const modules:Record<string,any>=import.meta.glob(["./modules/*.ts"],{
+    eager:true
+});
+
+// console.log(modules);
+
+const routes:Array<RouteRecordRaw>=[];
+
+Object.keys(modules).forEach((key)=>{
+    // console.log(modules[key]);
+    const module=modules[key].default;
+    routes.push(module);
+})
+
+routes.push(homeRouter);
+routes.push(aboutRouter);
+
 
 const router=createRouter({
-    history:createWebHashHistory(),
+    history:createWebHistory(),
     routes
 });
 
